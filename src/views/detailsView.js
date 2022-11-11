@@ -1,30 +1,37 @@
-import { html } from "../../node_modules/lit-html/lit-html.js";
+import { html, nothing } from "../../node_modules/lit-html/lit-html.js";
+import { getOne } from "../api-calls.js";
+import { isAuth } from "../middlewares/middleware.js";
 
-const detailsView = () => html`
+const detailsView = (listing, userId) => html`
     <section id="listing-details">
         <h1>Details</h1>
         <div class="details-info">
-            <img src="/images/audia3.jpg">
+            <img src=${listing.imageUrl}>
             <hr>
             <ul class="listing-props">
-                <li><span>Brand:</span>Audi</li>
-                <li><span>Model:</span>A3</li>
-                <li><span>Year:</span>2018</li>
-                <li><span>Price:</span>25000$</li>
+                <li><span>Brand:</span>${listing.brand}</li>
+                <li><span>Model:</span>${listing.model}</li>
+                <li><span>Year:</span>${listing.year}</li>
+                <li><span>Price:</span>${listing.price}$</li>
             </ul>
     
-            <p class="description-para">Some description of this car. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Sunt voluptate quam nesciunt ipsa veritatis voluptas optio debitis repellat porro
-                sapiente.</p>
+            <p class="description-para">${listing.description}</p>
     
-            <div class="listings-buttons">
-                <a href="#" class="button-list">Edit</a>
-                <a href="#" class="button-list">Delete</a>
-            </div>
+            ${isAuth() && listing._ownerId == userId ?
+                html`
+                <div class="listings-buttons">
+                    <a href="${`/${listing._id}/edit`}" class="button-list">Edit</a>
+                    <a href=${`/${listing._id}/delete`} class="button-list">Delete</a>
+                </div>`
+                : nothing
+            }
         </div>
     </section>
 `;
 
-export const renderdetails = (ctx) => {
-    ctx.rendering(detailsView());
+export const renderdetails = async (ctx) => {
+    const listId = ctx.params.listingId;
+    const userId = JSON.parse(localStorage.getItem('_id'));
+    const listing = await getOne(listId);
+    ctx.rendering(detailsView(listing, userId));
 }

@@ -8,7 +8,7 @@ const myListingsView = () => html`
             <!-- Display all records -->
             <div class="listing">
                 <div class="preview">
-                    <img src="../../public/images/audia3.jpg">
+                    <img src="/images/audia3.jpg">
                 </div>
                 <h2>Audi A3</h2>
                 <div class="info">
