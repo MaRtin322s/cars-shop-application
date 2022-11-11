@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+server/server.js
+tests/mock-data.json
+tests/e2e.test.js
