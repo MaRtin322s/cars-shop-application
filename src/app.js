@@ -1,5 +1,5 @@
 import page from "../node_modules/page/page.mjs";
-import { changeNav, renderTemplate } from "./middlewares/middleware.js";
+import { changeNav, getToken, renderTemplate } from "./middlewares/middleware.js";
 import { renderCreate } from "./views/createView.js";
 import { renderHome } from "./views/homeView.js";
 import { renderListings } from "./views/listingsView.js";
@@ -23,7 +23,15 @@ page.start();
 changeNav();
 
 function logout() {
-    localStorage.clear();
-    page.redirect('/');
-    changeNav();
+    fetch('http://localhost:3030/users/logout', {
+        method: 'GET',
+        headers: {
+            'X-Authorization': getToken()
+        }
+    })
+    .then(() => {
+        localStorage.clear();
+        page.redirect('/');
+        changeNav();
+    });
 }

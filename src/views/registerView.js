@@ -42,15 +42,19 @@ function registerHandler(ev) {
     const formData = new FormData(ev.currentTarget);
     const username = formData.get('username');
     const password = formData.get('password');
-    const rePass = formData .get('repeatPass');
+    const rePass = formData.get('repeatPass');
     const data = { username, password, rePass };
 
-    registerUser(data)
-        .then(user => {
-            localStorage.setItem('_id', user._id);
-            localStorage.setItem('username', user.username);
-            localStorage.setItem('accessToken', user.accessToken);
-            page.redirect('/');
-            changeNav();
-        });
+    if (username == '' || password == '' || rePass == '') {
+        alert("All fields are required!")
+    } else {
+        registerUser(data)
+            .then(user => {
+                localStorage.setItem('_id', JSON.stringify(user._id));
+                localStorage.setItem('username', JSON.stringify(user.username));
+                localStorage.setItem('accessToken', JSON.stringify(user.accessToken));
+                page.redirect('/');
+                changeNav();
+            });
+    }
 }

@@ -39,12 +39,18 @@ function loginHandler(ev) {
     const password = formData.get('password');
     const data = { username, password };
 
-    loginUser(data)
-        .then(user => {
-            localStorage.setItem('_id', user._id);
-            localStorage.setItem('username', user.username);
-            localStorage.setItem('accessToken', user.accessToken);
-            page.redirect('/');
-            changeNav();
-        })
+    if (username && password) {
+        loginUser(data)
+            .then(user => {
+                localStorage.setItem('_id', JSON.stringify(user._id));
+                localStorage.setItem('username', JSON.stringify(user.username));
+                localStorage.setItem('accessToken', JSON.stringify(user.accessToken));
+                const username = document.getElementById('username');
+                username.textContent = `Welcome ${user.username}`;
+                page.redirect('/listings');
+                changeNav();
+            });
+    } else { 
+        alert("All fields are required!")
+    }
 }
