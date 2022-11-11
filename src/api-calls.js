@@ -64,4 +64,5 @@ export const editListing = (listId, data) => {
     .then(res => res.json());
 }
 
-export 
+export const getMyListings = (userId) => fetch(`http://localhost:3030/data/cars?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`).then(res => res.json());
+export const searchListings = (year) => fetch(`http://localhost:3030/data/cars?where=year%3D${year}`).then(res => res.json());
