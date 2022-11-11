@@ -1,9 +1,12 @@
+import page from '../../node_modules/page/page.mjs';
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { registerUser } from "../api-calls.js";
+import { changeNav } from '../middlewares/middleware.js';
 
 const registerView = () => html`
     <section id="register">
         <div class="container">
-            <form id="register-form">
+            <form id="register-form" @submit=${registerHandler}>
                 <h1>Register</h1>
                 <p>Please fill in this form to create an account.</p>
                 <hr>
@@ -31,4 +34,23 @@ const registerView = () => html`
 
 export const renderRegister = (ctx) => {
     ctx.rendering(registerView());
+}
+
+function registerHandler(ev) {
+    ev.preventDefault();
+
+    const formData = new FormData(ev.currentTarget);
+    const username = formData.get('username');
+    const password = formData.get('password');
+    const rePass = formData .get('repeatPass');
+    const data = { username, password, rePass };
+
+    registerUser(data)
+        .then(user => {
+            localStorage.setItem('_id', user._id);
+            localStorage.setItem('username', user.username);
+            localStorage.setItem('accessToken', user.accessToken);
+            page.redirect('/');
+            changeNav();
+        });
 }

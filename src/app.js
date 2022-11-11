@@ -1,5 +1,5 @@
 import page from "../node_modules/page/page.mjs";
-import { renderTemplate } from "./middlewares/middleware.js";
+import { changeNav, renderTemplate } from "./middlewares/middleware.js";
 import { renderCreate } from "./views/createView.js";
 import { renderHome } from "./views/homeView.js";
 import { renderListings } from "./views/listingsView.js";
@@ -14,8 +14,16 @@ page('/listings', renderListings);
 page('/year', renderSearch);
 page('/login', renderLogin);
 page('/register', renderRegister);
-page('/logout', renderHome);
+page('/logout', logout);
 page('/create', renderCreate);
 page('/myListings', mylistings);
 
 page.start();
+
+changeNav();
+
+function logout() {
+    localStorage.clear();
+    page.redirect('/');
+    changeNav();
+}

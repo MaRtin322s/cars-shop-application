@@ -12,7 +12,7 @@ export const renderTemplate = (ctx, next) => {
 }
 
 export const isAuth = () => {
-    const serializedUser = localStorage.getItem('email');
+    const serializedUser = localStorage.getItem('username');
 
     if (serializedUser) {
         return true;
