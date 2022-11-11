@@ -32,3 +32,7 @@ const createView = () => html`
         </div>
     </section>
 `;
+
+export const renderCreate = (ctx) => {
+    ctx.rendering(createView());
+}

@@ -8,7 +8,7 @@ const myListingsView = () => html`
             <!-- Display all records -->
             <div class="listing">
                 <div class="preview">
-                    <img src="/images/audia3.jpg">
+                    <img src="../../public/images/audia3.jpg">
                 </div>
                 <h2>Audi A3</h2>
                 <div class="info">
@@ -17,7 +17,7 @@ const myListingsView = () => html`
                         <h3>Price: 25000 $</h3>
                     </div>
                     <div class="data-buttons">
-                        <a href="#" class="button-carDetails">Details</a>
+                        <a href="" class="button-carDetails">Details</a>
                     </div>
                 </div>
             </div>
@@ -27,3 +27,7 @@ const myListingsView = () => html`
         </div>
     </section>
 `;
+
+export const mylistings = (ctx) => {
+    ctx.rendering(myListingsView());
+}

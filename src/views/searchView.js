@@ -15,7 +15,7 @@ const searchView = () => html`
             <!-- Display all records -->
             <div class="listing">
                 <div class="preview">
-                    <img src="/images/audia3.jpg">
+                    <img src="../../public/images/audia3.jpg">
                 </div>
                 <h2>Audi A3</h2>
                 <div class="info">
@@ -34,3 +34,7 @@ const searchView = () => html`
         </div>
     </section>
 `;
+
+export const renderSearch = (ctx) => {
+    ctx.rendering(searchView());
+}

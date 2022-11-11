@@ -8,7 +8,7 @@ const listingsView = () => html`
             <!-- Display all records -->
             <div class="listing">
                 <div class="preview">
-                    <img src="/images/audia3.jpg">
+                    <img src="../../public/images/audia3.jpg">
                 </div>
                 <h2>Audi A3</h2>
                 <div class="info">
@@ -17,14 +17,14 @@ const listingsView = () => html`
                         <h3>Price: 25000 $</h3>
                     </div>
                     <div class="data-buttons">
-                        <a href="#" class="button-carDetails">Details</a>
+                        <a href="" class="button-carDetails">Details</a>
                     </div>
                 </div>
             </div>
     
             <div class="listing">
                 <div class="preview">
-                    <img src="/images/benz.jpg">
+                    <img src="../../public/images/benz.jpg">
                 </div>
                 <h2>Mercedes A-class</h2>
                 <div class="info">
@@ -33,14 +33,14 @@ const listingsView = () => html`
                         <h3>Price: 27000 $</h3>
                     </div>
                     <div class="data-buttons">
-                        <a href="#" class="button-carDetails">Details</a>
+                        <a href="" class="button-carDetails">Details</a>
                     </div>
                 </div>
             </div>
     
             <div class="listing">
                 <div class="preview">
-                    <img src="/images/bmw.jpg">
+                    <img src="../../public/images/bmw.jpg">
                 </div>
                 <h2>BMW 3 series</h2>
                 <div class="info">
@@ -49,7 +49,7 @@ const listingsView = () => html`
                         <h3>Price: 22000 $</h3>
                     </div>
                     <div class="data-buttons">
-                        <a href="#" class="button-carDetails">Details</a>
+                        <a href="" class="button-carDetails">Details</a>
                     </div>
                 </div>
             </div>
@@ -59,3 +59,7 @@ const listingsView = () => html`
         </div>
     </section>
 `;
+
+export const renderListings = (ctx) => {
+    ctx.rendering(listingsView());
+}

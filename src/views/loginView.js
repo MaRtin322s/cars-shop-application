@@ -17,9 +17,13 @@ const loginView = () => html`
             </form>
             <div class="signin">
                 <p>Dont have an account?
-                    <a href="#">Sign up</a>.
+                    <a href="/register">Sign up</a>.
                 </p>
             </div>
         </div>
     </section>
 `;
+
+export const renderLogin = (ctx) => {
+    ctx.rendering(loginView());
+}

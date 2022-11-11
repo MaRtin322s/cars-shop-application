@@ -24,3 +24,7 @@ const detailsView = () => html`
         </div>
     </section>
 `;
+
+export const renderdetails = (ctx) => {
+    ctx.rendering(detailsView());
+}
