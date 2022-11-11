@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Car Tube</title>
-    <link rel="stylesheet" href="/style/styles.css">
+    <link rel="stylesheet" href="./public/style/styles.css">
     <script type="module" src="./src/app.js"></script>
 </head>
 
@@ -12,20 +12,20 @@
     <div id="container">
         <header>
             <nav>
-                <a class="active" href="">Home</a>
-                <a href="">All Listings</a>
-                <a href="">By Year</a>
+                <a class="active" href="/">Home</a>
+                <a href="/listings">All Listings</a>
+                <a href="/year">By Year</a>
                 <!-- Guest users -->
                 <div id="guest">
-                    <a href="">Login</a>
-                    <a href="">Register</a>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
                 </div>
                 <!-- Logged users -->
                 <div id="profile">
                     <a>Welcome username</a>
-                    <a href="">My Listings</a>
-                    <a href="">Create Listing</a>
-                    <a href="">Logout</a>
+                    <a href="/myListings">My Listings</a>
+                    <a href="/create">Create Listing</a>
+                    <a href="/logout">Logout</a>
                 </div>
             </nav>
         </header>
