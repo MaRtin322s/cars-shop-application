@@ -43,7 +43,7 @@ function registerHandler(ev) {
     const username = formData.get('username');
     const password = formData.get('password');
     const rePass = formData.get('repeatPass');
-    const data = { username, password, rePass };
+    const data = { username, password };
 
     if (username == '' || password == '' || rePass == '') {
         alert("All fields are required!")
@@ -53,7 +53,9 @@ function registerHandler(ev) {
                 localStorage.setItem('_id', JSON.stringify(user._id));
                 localStorage.setItem('username', JSON.stringify(user.username));
                 localStorage.setItem('accessToken', JSON.stringify(user.accessToken));
-                page.redirect('/');
+                const username = document.getElementById('username');
+                username.textContent = `Welcome ${user.username}`;
+                page.redirect('/listings');
                 changeNav();
             });
     }
