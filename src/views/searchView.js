@@ -6,7 +6,7 @@ const listingView = (listing) => html`
     <div class="preview">
         <img src=${listing.imageUrl}>
     </div>
-    <h2>${listing.brand} ${listing.model}/h2>
+    <h2>${listing.brand} ${listing.model}</h2>
     <div class="info">
         <div class="data-info">
             <h3>Year: ${listing.year}</h3>
@@ -19,22 +19,48 @@ const listingView = (listing) => html`
 </div>
 `;
 
-const searchView = () => html`
+const searchView = (onSearch, cars) => html`
     <section id="search-cars">
         <h1>Filter by year</h1>
     
         <div class="container">
             <input id="search-input" type="text" name="search" placeholder="Enter desired production year">
-            <button class="button-list">Search</button>
+            <button @click=${onSearch} class="button-list">Search</button>
         </div>
     
         <h2>Results:</h2>
         <div class="listings">
-            <p class="no-cars"> No results.</p>
+        ${cars 
+            ? cars.length > 0 
+                ? cars.map(car => listingView(car)) 
+                : html`<p class="no-cars"> No results.</p>` 
+            : null}
         </div>
     </section>
 `;
 
 export const renderSearch = async (ctx) => {
-    ctx.rendering(searchView());
+    ctx.rendering(searchView(onSearch));
+
+    async function onSearch() {
+        let year = document.getElementById('search-input')
+
+        try {
+            if(!year.value || isNaN(year.value)) {
+                alert('Enter valid year!');
+            }
+
+            const cars = await searchListings(year.value);
+            console.log(cars);
+
+            ctx.rendering(searchView(onSearch, cars))
+            year.value=""
+        } catch (err) {
+            ctx.rendering(searchView(onSearch))
+            year.value=""
+            alert(err.message)
+        }
+        
+
+    }
 }
